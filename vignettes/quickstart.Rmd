@@ -1,0 +1,92 @@
+---
+title: "Quickstart"
+author: "Martin Barner"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Quickstart}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+### Generating fake data
+
+**load package**
+
+```{r}
+library(xlsformfill)
+```
+
+**load questionnaire** choices and questions from csv as data frames
+
+```{r}
+questions <- read.csv("../tests/testthat/kobo questions.csv")
+choices <- read.csv("../tests/testthat/kobo choices.csv")
+```
+
+**generate fake dataset** with ` n ` rows
+
+```{r,message=FALSE,warning=FALSE}
+fake_data <- xlsform_fill(questions,
+                          choices,
+                          n = 10)
+
+
+```
+
+Take note of any warnings. Not all skiplogic and not all calculations will be calculated correctly if the questionnaire has issues. Advcanced skiplogic functions may not be supported.
+
+<!-- **Example Output** -->
+
+<!-- ```{r,results='asis',echo=FALSE} -->
+<!-- knitr::kable(fake_data) -->
+<!-- ``` -->
+
+**save to file**
+```{r,eval=F}
+write.csv(fake_data,"my_fake_data_file.csv")
+```
+
+
+### Supported Features
+
+- respects ODK "`relevant`" skip logic (Some advanced functionality such as "coalesce()" not covered)
+- ODK `calculation` variables translated to R and respective columns included
+- adds UUID column
+- adds both logical choice columns and concatenated column for select_multiple questions
+
+**Supported ODK question types**
+
+- integer
+- decimal
+- select_one
+- select_multiple
+- text
+- deviceid
+- start
+- end
+- dateTime
+
+**ODK question types that are _not_ supported for now**
+
+- geopoint
+- geotrace
+- geoshape
+- audio
+- video
+- file
+- barcode
+- acknowledge
+- hidden
+- xml-external
+- image
+- range
+- rank
+

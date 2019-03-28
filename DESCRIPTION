@@ -1,0 +1,22 @@
+Package: xlsformfill
+Type: Package
+Title: Create random data for xlsform questionnaires
+Version: 0.1.0
+Author: Martin Barner
+Maintainer: Martin Barner <martin.barner@impact-initiatives.org>
+Description: Create fake data for an xlsform for testing purposes
+License: What license is it under?
+Encoding: UTF-8
+LazyData: true
+Suggests: 
+    testthat,
+    knitr,
+    rmarkdown
+Imports: 
+    koboquest,
+    uuid,
+    stringi,
+    magrittr,
+    tibble
+RoxygenNote: 6.1.1
+VignetteBuilder: knitr
