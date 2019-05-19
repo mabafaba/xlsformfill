@@ -63,9 +63,11 @@ fill_select_multiple<-function(varname,n,options){
 fill_datetime<-function(varname,n){
   date_0<-Sys.time()
   filling<- tibble::tibble(date_0 - runif(n,min=0,max=10000))
+  filling[,1]<-format.Date(as.data.frame(filling)[,1],"%Y-%m-%dT%H:%M:%S%z") %>% as.character
   colnames(filling)<-varname
   filling
 }
+
 
 
 
@@ -97,7 +99,7 @@ fill_calculate<-function(varname,kobo_calculation,other_data){
       }
       calc_result
     },error=function(e){
-      warning(paste0("filling '",varname,"' with NA. Calculation failed with error:",e$message))
+      warning(paste0("filling '",varname,"' with NA. Calculation failed with error: \n",e$message))
       rep(NA,nrow(other_data))
     })
   })

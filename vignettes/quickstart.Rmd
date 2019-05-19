@@ -27,8 +27,8 @@ library(xlsformfill)
 **load questionnaire** choices and questions from csv as data frames
 
 ```{r}
-questions <- read.csv("../tests/testthat/kobo questions.csv")
-choices <- read.csv("../tests/testthat/kobo choices.csv")
+questions <- read.csv("../tests/testthat/kobo questions.csv", stringsAsFactors = F)
+choices <- read.csv("../tests/testthat/kobo choices.csv", stringsAsFactors = F)
 ```
 
 **generate fake dataset** with ` n ` rows
@@ -41,7 +41,12 @@ fake_data <- xlsform_fill(questions,
 
 ```
 
-Take note of any warnings. Not all skiplogic and not all calculations will be calculated correctly if the questionnaire has issues. Advcanced skiplogic functions may not be supported.
+```{r,results='asis',echo = F}
+# knitr::kable(fake_data,format = 'markdown')
+
+```
+
+Take note of any warnings. Not all skiplogic and not all calculations will be calculated correctly if the questionnaire has issues. Advanced skiplogic functions may not be supported.
 
 <!-- **Example Output** -->
 
