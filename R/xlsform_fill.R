@@ -1,4 +1,4 @@
-
+importFrom("stats", "rnorm", "runif")
 
 #' generate data for an xlsform
 #' @param questions the xlsform questions sheet as data frame
@@ -12,8 +12,14 @@ xlsform_fill <- function(questions,choices,n) {
   questions$relevant<-as.character(questions$relevant)
 
   q<-get_questionnaire_functions(questions,choices)
+
+  # make function to retreive each questions choices from questionnaire:
   get_choices<-choices_of_question_funfact(questions,choices)
+
+  # extact "type" frome questionnaire
   get_raw_type<-function(varname){questions$type[match(varname,questions$name)][1]}
+
+  # generete data for each questionnaire column base depending on data type
   filled<-lapply(questions$name,function(varname){
 
     filling<-tibble::tibble(1:n)[,0]

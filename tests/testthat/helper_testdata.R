@@ -33,7 +33,6 @@ choice_numeric_to_logical<-function(df,questionnaire){
 
 
 
-
 expected <- choice_numeric_to_logical(expected,questionnaire)
 
 
