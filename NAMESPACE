@@ -3,3 +3,4 @@
 export("%>%")
 export(xlsform_fill)
 importFrom(magrittr,"%>%")
+importFrom("stats", "rnorm", "runif")

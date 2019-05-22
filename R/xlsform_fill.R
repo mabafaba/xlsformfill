@@ -1,4 +1,3 @@
-importFrom("stats", "rnorm", "runif")
 
 #' generate data for an xlsform
 #' @param questions the xlsform questions sheet as data frame
