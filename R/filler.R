@@ -90,19 +90,34 @@ fill_calculate_placeholder<-function(varname,n){
 fill_calculate<-function(varname,kobo_calculation,other_data){
 
   calculation_as_rcode<-koboquest:::rify_condition(kobo_calculation)
+
+  names(other_data)<-to_alphanumeric_lowercase(names(other_data))
+
+  coalesce<-function(x,y){
+    if(is.na(x) | x==""){
+      return(y)
+    }
+    return(x)
+  }
+
   if(calculation_as_rcode==""){calculation_as_rcode<-"rep(NA,nrow(other_data))"}
-  calc_result<-with(other_data,{
-    tryCatch({
-      calc_result<-eval(parse(text=calculation_as_rcode))
-      if(length(calc_result)!=nrow(other_data)){
-        stop(paste0("filling '",varname,"' with NA. Calculation did not produce one value per data row."))
-      }
-      calc_result
-    },error=function(e){
-      warning(paste0("filling '",varname,"' with NA. Calculation failed with error: \n",e$message))
-      rep(NA,nrow(other_data))
-    })
-  })
+  calc_result<-tryCatch({purrr::pmap(.l = other_data
+                           ,.f = function(...){
+                             dots<-list(...);
+                             with(dots,{
+
+                                 calc_result<-eval(parse(text=calculation_as_rcode))
+                                 if(length(calc_result)!=1){
+                                   stop(paste0("filling '",varname,"' with NA. Calculation did not produce one value per data row."))
+                                 }
+                                 calc_result
+                               })
+                           })},
+                        error=function(e){
+                             warning(paste0("\nfilling '",varname,"' with NA. Calculation failed with error: \n",e$message))
+                             rep(NA,nrow(other_data))
+                           })
+
   calc_result<-unlist(calc_result)
   filling<- tibble::tibble(calc_result)
   colnames(filling)<-varname

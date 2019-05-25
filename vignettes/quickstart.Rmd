@@ -27,8 +27,8 @@ library(xlsformfill)
 **load questionnaire** choices and questions from csv as data frames
 
 ```{r}
-questions <- read.csv("../tests/testthat/kobo questions.csv", stringsAsFactors = F)
-choices <- read.csv("../tests/testthat/kobo choices.csv", stringsAsFactors = F)
+questions <- read.csv("../tests/testthat/kobo_questions.csv", stringsAsFactors = F)
+choices <- read.csv("../tests/testthat/kobo_choices.csv", stringsAsFactors = F)
 ```
 
 **generate fake dataset** with ` n ` rows

@@ -16,14 +16,19 @@ xlsform_fill <- function(questions,choices,n) {
   get_choices<-choices_of_question_funfact(questions,choices)
 
   # extact "type" frome questionnaire
-  get_raw_type<-function(varname){questions$type[match(varname,questions$name)][1]}
+  get_raw_type<-function(varname){
+    raw_type <- questions$type[match(varname,questions$name)][1]
+    if(grepl("select_one",raw_type)){return("select_one")}
+    if(grepl("select_multiple",raw_type)){return("select_multiple")}
+    if(grepl("select_multiple",raw_type)){return("select_multiple")}
+    return(raw_type)
+    }
 
   # generete data for each questionnaire column base depending on data type
   filled<-lapply(questions$name,function(varname){
 
     filling<-tibble::tibble(1:n)[,0]
 
-    # if(varname=="start"){browser()}
     if(get_raw_type(varname)=="start"){filling<-fill_datetime(varname,n)}
     if(get_raw_type(varname)=="end"){filling<-fill_datetime(varname,n)}
     if(get_raw_type(varname)=="deviceid"){filling<-fill_deviceid(varname,n)}
@@ -51,9 +56,12 @@ xlsform_fill <- function(questions,choices,n) {
   # add calculations
 
 
-
-  filled<-remove_skipped_values(filled,q)
+  original_colnames<- colnames(filled)
+  simplified_colnames<-to_alphanumeric_lowercase(colnames(filled))
+  colnames(filled)  <- simplified_colnames
   filled<-add_form_calculations(filled,questions)
+  filled<-remove_skipped_values(filled,q)
+  colnames(filled)<-original_colnames
   filled
 }
 
