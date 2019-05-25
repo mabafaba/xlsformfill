@@ -99,6 +99,7 @@ fill_calculate<-function(varname,kobo_calculation,other_data){
     }
     return(x)
   }
+  not<-function(x){!x}
 
   if(calculation_as_rcode==""){calculation_as_rcode<-"rep(NA,nrow(other_data))"}
   calc_result<-tryCatch({purrr::pmap(.l = other_data
