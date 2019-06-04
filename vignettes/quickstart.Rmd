@@ -95,3 +95,14 @@ write.csv(fake_data,"my_fake_data_file.csv")
 - range
 - rank
 
+
+### Generating samplingframe
+
+
+```{r}
+samplingframe <- xlsform_generate_samplingframe(choices = choices,
+                                                strata_list_names = c("urban_rural",
+                                                                      "province")
+                                                )
+samplingframe
+```

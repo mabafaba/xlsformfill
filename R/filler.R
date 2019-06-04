@@ -101,6 +101,8 @@ fill_calculate<-function(varname,kobo_calculation,other_data){
   }
   not<-function(x){!x}
 
+  today<-Sys.Date
+
   if(calculation_as_rcode==""){calculation_as_rcode<-"rep(NA,nrow(other_data))"}
   calc_result<-tryCatch({purrr::pmap(.l = other_data
                            ,.f = function(...){

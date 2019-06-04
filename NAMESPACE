@@ -2,5 +2,5 @@
 
 export("%>%")
 export(xlsform_fill)
+export(xlsform_generate_samplingframe)
 importFrom(magrittr,"%>%")
-importFrom("stats", "rnorm", "runif")
