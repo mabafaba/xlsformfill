@@ -12,8 +12,10 @@ skipped_values<-function(data,questionnaire){
 
 remove_skipped_values<-function(data,questionnaire){
   skipped<-skipped_values(data,questionnaire)
+
   for(i in ncol(data)){
     data[which(skipped[,i]),i]<-NA
+
   }
   data
 }
