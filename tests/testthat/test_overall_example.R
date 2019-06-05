@@ -4,10 +4,6 @@ testthat::test_that("overal filled structure equal real data",{
                                   choices = ch,
                                   n = 40)
 
-
-
-
-
 })
 
 
@@ -19,4 +15,13 @@ testthat::test_that("is it perfect?",{
   missmatches_note<-paste0(missmatches,collapse="\n")
   testthat::expect_equal(length(missmatches),0,label = "it is not perfect.",info = missmatches_note)
   })
+
+
+
+
+
+
+
+
+
 
