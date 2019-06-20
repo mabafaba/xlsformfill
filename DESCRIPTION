@@ -13,9 +13,11 @@ Suggests:
     knitr,
     rmarkdown
 Imports: 
-    koboquest,
+    koboquest (>= 1.0.1),
     stringi,
     magrittr,
     tibble
 RoxygenNote: 6.1.1
 VignetteBuilder: knitr
+Remotes:  
+    mabafaba/koboquest
