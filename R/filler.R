@@ -54,7 +54,7 @@ fill_select_multiple<-function(varname,n,options){
     return(tibble::tibble(1:n)[,0])
   }
   options<-as.character(options)
-
+  options<-unique(options)
   filling_logical<-matrix(sample(c(T,F),n*length(options),T),nrow = n)
   colnames(filling_logical)<-paste0(varname,"/",options)
 
