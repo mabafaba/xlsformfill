@@ -27,13 +27,13 @@ library(xlsformfill)
 **load questionnaire** choices and questions from csv as data frames
 
 ```{r}
-questions <- read.csv("../tests/testthat/kobo_questions.csv", stringsAsFactors = F)
-choices <- read.csv("../tests/testthat/kobo_choices.csv", stringsAsFactors = F)
+questions <- read.csv(system.file(package = "xlsformfill", "forms", "kobo_questions.csv"), stringsAsFactors = FALSE)
+choices <- read.csv(system.file(package = "xlsformfill", "forms", "kobo_choices.csv"), stringsAsFactors = FALSE)
 ```
 
 **generate fake dataset** with ` n ` rows
 
-```{r,message=FALSE,warning=FALSE}
+```{r, message=FALSE, warning=FALSE}
 fake_data <- xlsform_fill(questions,
                           choices,
                           n = 10)
@@ -41,7 +41,7 @@ fake_data <- xlsform_fill(questions,
 
 ```
 
-```{r,results='asis',echo = F}
+```{r, results='asis', echo = FALSE}
 # knitr::kable(fake_data,format = 'markdown')
 
 ```
@@ -55,7 +55,7 @@ Take note of any warnings. Not all skiplogic and not all calculations will be ca
 <!-- ``` -->
 
 **save to file**
-```{r,eval=F}
+```{r, eval = FALSE}
 write.csv(fake_data,"my_fake_data_file.csv")
 ```
 
